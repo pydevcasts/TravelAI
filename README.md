@@ -28,8 +28,7 @@ TravelAI incorporates machine learning to enhance user experience through:
 ## Architecture
 TravelAI is built on a microservices architecture, enhancing scalability and maintainability. Each microservice is dedicated to specific functionalities, allowing for independent development, testing, and deployment. This architecture not only increases system resilience but also enables rapid iteration and feature enhancements.
 
-## Architecture
-TravelAI is built on a microservices architecture, enhancing scalability and maintainability. Each microservice is dedicated to specific functionalities, allowing for independent development, testing, and deployment. This architecture not only increases system resilience but also enables rapid iteration and feature enhancements.
+
 
 ## Getting Started
 To run the project locally using Docker, follow these steps:
