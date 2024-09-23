@@ -1,0 +1,66 @@
+version: '3.3'
+
+services:
+  app:
+    build: 
+      context: ./Nextera/
+      args:
+        no_cache: "true"
+    command: sh -c "python manage.py collectstatic --noinput && python manage.py makemigrations && python manage.py migrate --no-input && gunicorn conf.wsgi:application -b 0.0.0.0:8000"
+    container_name: server
+    volumes:
+      - ./Nextera:/code
+    ports:
+      - "8000:8000"  
+    networks:
+      - main
+    restart: always
+    depends_on:
+      - db
+
+
+  # Database Postgres
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=nextera
+      - POSTGRES_USER=nextera
+      - POSTGRES_PASSWORD=nextera
+      - POSTGRES_HOST_AUTH_METHOD=trust
+     
+  
+    ports:
+      - "5432:5432"
+    networks:
+      - main
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    command: sh -c "nginx -g 'daemon off;'"
+    depends_on:
+      - app
+    networks:
+      - main
+    ports:
+      - "80:80"  
+      - "443:443"
+    restart: always
+    volumes:
+      - ./Nextera/static/:/code/static
+      - ./Nextera/media/:/code/media
+      - ./Nextera/nginx.conf:/etc/nginx/nginx.conf
+
+
+volumes:
+  staticfiles:
+    name: "Static"
+  mediafiles:
+    name: "Media"
+  postgres_data:
+
+networks:
+  main:
