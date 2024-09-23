@@ -1,7 +1,8 @@
 # TravelAI
 
 ## Description
-TravelAI is an innovative travel application that utilizes advanced artificial intelligence to deliver personalized travel experiences. By analyzing user preferences and past behaviors, TravelAI provides tailored recommendations for unique destinations, engaging activities, and comfortable accommodations. This intelligent approach simplifies the travel planning process while enriching the overall journey, ensuring that every trip aligns perfectly with individual tastes and desires.
+TravelAI is an innovative travel application that utilizes advanced artificial intelligence to deliver personalized travel experiences and house price predictions. By analyzing user preferences and past behaviors, TravelAI provides tailored recommendations for unique destinations, engaging activities, and comfortable accommodations. Additionally, the app leverages machine learning algorithms to predict house prices, helping users make informed decisions about their travel and real estate investments. This intelligent approach simplifies the travel planning process while enriching the overall journey, ensuring that every trip aligns perfectly with individual tastes and desires.
+
 
 ## Features
 - **Personalized Travel Suggestions:** Analyze user data to offer customized destination and activity recommendations.
