@@ -1,18 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from django.contrib.auth.models import Group
 from users.manager import UserManager
 
 
 
-class Group(models.Model):
-    name = models.CharField(max_length=100)
+class CustomGroup(Group):
+    
     min_participants = models.PositiveIntegerField(default=1)
     max_participants = models.PositiveIntegerField(default=10)
     status = models.BooleanField(default=True)  # True for active, False for inactive
-
+    # class Meta:
+    #     proxy = True
     def user_count(self):
-        return self.user.count()
+        return self.users.count()
 
     def __str__(self):
         return self.name
@@ -22,7 +23,7 @@ class CustomUser(AbstractUser):
     username = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
-    group = models.ForeignKey(Group, null=True, blank=True, on_delete=models.SET_NULL, related_name='user')
+    group = models.ForeignKey(CustomGroup, null=True, blank=True, on_delete=models.SET_NULL, related_name='users')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

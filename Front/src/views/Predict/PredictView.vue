@@ -3,9 +3,10 @@ import BreadcrumbDefault from '@/components/Breadcrumbs/BreadcrumbDefault.vue'
 import DefaultCard from '@/components/Forms/DefaultCard.vue'
 import InputGroup from '@/components/Forms/InputGroup.vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
+import { useToast } from "vue-toastification";
 import { ref } from 'vue'
 import axios from 'axios'
-
+const toast = useToast();
 const pageTitle = ref('Predict House');
 const crim = ref<number | null>(null);
 const zn = ref<number | null>(null);
@@ -87,7 +88,9 @@ const predict = async (event: Event) => {
     });
 
     predictedPrice.value = response.data.predicted_price;
+    toast.success("Price is predicted successful!", { timeout: 2000 });
   } catch (error) {
+    toast.error("There are problem!", { timeout: 2000 });
     console.error('Error predicting price:', error);
     errorMessage.value = "An error occurred while predicting the price. Please try again.";
   } finally {

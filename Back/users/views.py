@@ -1,7 +1,7 @@
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
-from .models import CustomUser,  Group, Rating, Request, Trip
+from .models import CustomUser,  CustomGroup, Rating, Request, Trip
 from .serializers import RatingSerializer, RequestSerializer, TripSerializer, UserSerializer, GroupSerializer
 from .filters import GroupFilter, UserFilter
 from rest_framework.permissions import IsAdminUser
@@ -26,9 +26,9 @@ class GroupViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         if self.request.user.is_staff:
-            return Group.objects.all()
+            return CustomGroup.objects.all()
         else:
-            return Group.objects.filter(status=True)
+            return CustomGroup.objects.filter(status=True)
 
 
 

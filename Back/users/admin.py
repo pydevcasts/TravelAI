@@ -1,8 +1,31 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
-from users.models import Group, CustomUser
+from users.models import CustomGroup, CustomUser
 from django.utils.translation import gettext_lazy as _
-admin.site.register(Group)
+from django.contrib import admin
+from django.contrib.auth.models import Group as DefaultGroup
+
+
+admin.site.unregister(DefaultGroup)
+
+@admin.register(CustomGroup)
+class CustomGroupAdmin(admin.ModelAdmin):
+    list_display = ('name', 'min_participants', 'max_participants', 'status')
+    filter_horizontal = ('permissions',)
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'status'),
+        }),
+        ('Participant Limits', {
+            'fields': ('permissions','min_participants', 'max_participants'),
+            'classes': ('wide', 'extrapretty'),  # Optional: add CSS classes for styling
+        }),
+    )
+
+    # Optionally, you can add more customization here
+    search_fields = ('name',)
+    ordering = ('name',)
+
 
 
 @admin.register(CustomUser)
@@ -23,7 +46,5 @@ class CustomUserAdmin(DjangoUserAdmin):
     list_display = ('email', 'first_name', 'last_name', 'is_active')
     search_fields = ('email', 'mobile', 'last_name')
 
-  
-    
    
     ordering = ('email',)

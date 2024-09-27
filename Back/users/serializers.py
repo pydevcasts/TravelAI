@@ -1,12 +1,12 @@
 
 from rest_framework import serializers
-from .models import CustomUser,  Group, Rating, Request, Trip
+from .models import CustomUser,  CustomGroup, Rating, Request, Trip
 
 class GroupSerializer(serializers.ModelSerializer):
     user_count = serializers.SerializerMethodField()
 
     class Meta:
-        model = Group
+        model = CustomGroup
         fields = ['id', 'name', 'user_count']
 
     def get_user_count(self, obj):
