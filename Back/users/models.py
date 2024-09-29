@@ -4,14 +4,11 @@ from django.contrib.auth.models import Group
 from users.manager import UserManager
 
 
-
 class CustomGroup(Group):
-    
     min_participants = models.PositiveIntegerField(default=1)
     max_participants = models.PositiveIntegerField(default=10)
     status = models.BooleanField(default=True)  # True for active, False for inactive
-    # class Meta:
-    #     proxy = True
+   
     def user_count(self):
         return self.users.count()
 
@@ -20,17 +17,26 @@ class CustomGroup(Group):
 
 
 class CustomUser(AbstractUser):
-    username = models.CharField(max_length=100)
+  
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
     group = models.ForeignKey(CustomGroup, null=True, blank=True, on_delete=models.SET_NULL, related_name='users')
+    username = None
+    STATUS_CHOICES = [
+        ('is_active', 'Active'),
+        ('is_superuser', 'Issuperuser'),
+        ('is_staff', 'Staff'),
+    ]
+    
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='active')
 
+    
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     objects = UserManager()
     def __str__(self):
-        return self.username
+        return self.email
 
 
 class Trip(models.Model):

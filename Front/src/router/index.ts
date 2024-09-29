@@ -4,11 +4,11 @@ import SigninView from '@/views/Authentication/SigninView.vue'
 import SignupView from '@/views/Authentication/SignupView.vue'
 import BasicChartView from '@/views/Charts/BasicChartView.vue'
 import ECommerceView from '@/views/Dashboard/ECommerceView.vue'
-import FormElementsView from '@/views/Forms/FormElementsView.vue'
+// import FormElementsView from '@/views/Forms/FormElementsView.vue'
 import PredictView from '@/views/Predict/PredictView.vue'
 import SettingsView from '@/views/Pages/SettingsView.vue'
-import ProfileView from '@/views/ProfileView.vue'
-import TablesView from '@/views/TablesView.vue'
+import ProfileView from '@/views/users/ProfileView.vue'
+import UsersView from '@/views/users/UsersView.vue'
 import AlertsView from '@/views/UiElements/AlertsView.vue'
 import ButtonsView from '@/views/UiElements/ButtonsView.vue'
 import { useUserStore } from '@/stores/userStore';
@@ -21,7 +21,6 @@ const routes = [
       title: 'eCommerce Dashboard'
     }
   },
-
   {
     path: '/profile',
     name: 'profile',
@@ -30,6 +29,7 @@ const routes = [
       title: 'Profile'
     }
   },
+
   // {
   //   path: '/forms/form-elements',
   //   name: 'formElements',
@@ -47,11 +47,11 @@ const routes = [
     }
   },
   {
-    path: '/tables',
-    name: 'tables',
-    component: TablesView,
+    path: '/users',
+    name: 'users',
+    component: UsersView,
     meta: {
-      title: 'Tables'
+      title: 'Users'
     }
   },
   {

@@ -5,7 +5,7 @@ import InputGroup from '@/components/Forms/InputGroup.vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import { useToast } from "vue-toastification";
 import { ref } from 'vue'
-import axios from 'axios'
+import instance from '@/axios';
 const toast = useToast();
 const pageTitle = ref('Predict House');
 const crim = ref<number | null>(null);
@@ -65,7 +65,7 @@ const predict = async (event: Event) => {
     });
     
     const token = localStorage.getItem('access');
-    const response = await axios.post('http://localhost:8000/api/predict/', {
+    const response = await instance.post('/api/predict/', {
       crim: Number(crim.value),
       zn: Number(zn.value),
       indus: Number(indus.value),
@@ -79,13 +79,9 @@ const predict = async (event: Event) => {
       ptratio: Number(ptratio.value),
       b: Number(b.value),
       lstat: Number(lstat.value),
-    },{
+    },
   
-      headers: {
-        'Authorization': `Bearer ${token}`, // Include the token in the headers
-      }
-  
-    });
+    );
 
     predictedPrice.value = response.data.predicted_price;
     toast.success("Price is predicted successful!", { timeout: 2000 });
