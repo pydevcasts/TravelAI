@@ -5,7 +5,8 @@ from .models import CustomUser,  CustomGroup, Rating, Request, Trip
 from .serializers import RatingSerializer, RequestSerializer, TripSerializer, UserSerializer, GroupSerializer
 from .filters import GroupFilter, UserFilter
 from rest_framework.permissions import IsAdminUser
-
+from rest_framework import status
+from rest_framework.response import Response
 
 
 class CustomUserViewSet(viewsets.ModelViewSet):
@@ -14,6 +15,13 @@ class CustomUserViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend,)
     filterset_class = UserFilter
     permission_classes = [IsAdminUser]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            self.perform_create(serializer)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class GroupViewSet(viewsets.ModelViewSet):

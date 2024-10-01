@@ -163,10 +163,10 @@ REST_AUTH = {
     'JWT_AUTH_HTTPONLY':False
 }
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'ROTATE_REFRESH_TOKENS': True,
-    'BLACKLIST_AFTER_ROTATION': True,
+    'ROTATE_REFRESH_TOKENS': True,  # فعال‌سازی چرخش توکن‌های تازه
+    'BLACKLIST_AFTER_ROTATION': True,  # فعال‌سازی لیست سیاه برای توکن‌های قدیمی
 }
 
 AUTHENTICATION_BACKENDS = [

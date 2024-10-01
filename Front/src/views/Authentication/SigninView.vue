@@ -67,6 +67,7 @@ const login = async () => {
 
     userStore.setUser(response.data.user);
     localStorage.setItem('access', response.data.access);
+    localStorage.setItem('refresh', response.data.refresh); 
 
     const userId = response.data.user.pk;
     const userDetailsResponse = await getUserDetails(userId);
