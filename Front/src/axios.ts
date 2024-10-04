@@ -26,11 +26,11 @@ instance.interceptors.response.use((response) => {
   if (error.response && error.response.data.code === 'token_not_valid') {
     const refreshToken = localStorage.getItem('refresh'); // توکن تازه را از storage بگیرید
 
+    console.log(refreshToken, 1111111111111111)
     if (refreshToken) {
       try {
-        const response = await axios.post('/rest-auth/token/refresh/', { refresh: refreshToken });
+        const response = await instance.post('/rest-auth/token/refresh/', { refresh: refreshToken });
         localStorage.setItem('access', response.data.access); // توکن جدید را ذخیره کنید
-console.log(response, 1111111111111111)
         // به روز رسانی هدر Authorization در درخواست اصلی
         originalRequest.headers.Authorization = `Bearer ${response.data.access}`;
         
@@ -39,7 +39,7 @@ console.log(response, 1111111111111111)
       } catch (refreshError) {
         console.error('Failed to refresh token:', refreshError);
         // کاربر را به صفحه ورود هدایت کنید
-        // Redirect to login page or handle accordingly
+        window.location.href = '/signin'; 
       }
     }
   }

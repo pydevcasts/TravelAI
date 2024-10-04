@@ -1,7 +1,7 @@
 import subprocess
 
 # اجرای دستور lsof برای یافتن پردازه‌های مرتبط با پورت 5432
-command = "sudo lsof -i :80"
+command = "sudo lsof -i :5432"
 result = subprocess.run(command, shell=True, stdout=subprocess.PIPE,\
                         stderr=subprocess.PIPE, text=True)
 

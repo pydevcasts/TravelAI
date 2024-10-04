@@ -4,8 +4,9 @@ import { useUserStore } from '@/stores/userStore';
 import { ref, onMounted } from 'vue';
 import { useToast } from "vue-toastification";
 
-// Sample user data
-const users = ref();
+const users = ref([
+     
+    ]);
 const userStore = useUserStore();
 const toast = useToast();
 const editUser = (userId: number) => {
@@ -40,6 +41,17 @@ const fetchUsers = async () => {
   console.log('Fetching users...', response);
   
 };
+const statusClass = (user) => {
+      if (user.is_superuser) {
+        return 'bg-blue-500 text-white'; // Blue for Superuser
+      } else if (user.is_staff) {
+        return 'bg-green-500 text-white'; // Green for Staff
+      } else if (user.is_active) {
+        return 'bg-yellow-500 text-black'; // Yellow for Active
+      } else {
+        return 'bg-gray-300 text-black'; // Gray for Inactive
+      }
+    };
 
 onMounted(() => {
   fetchUsers(); // Fetch users when the component mounts
@@ -79,10 +91,12 @@ onMounted(() => {
               <p class="text-black dark:text-white">{{ user.email }}</p>
             </td>
             <td class="py-5 px-4">
-              <p class="inline-flex rounded-full bg-opacity-10 py-1 px-3 text-sm font-medium"
-              >
-                {{ user.status }}
-              </p>
+              <p :class="statusClass(user)" class="inline-flex rounded-full py-1 px-3 text-sm font-medium">
+              <span v-if="user.is_superuser">Superuser</span>
+              <span v-else-if="user.is_staff">Staff</span>
+              <span v-else-if="user.is_active">Active</span>
+              <span v-else>Inactive</span>
+            </p>
             </td>
             <td class="py-5 px-4">
               <div class="flex items-center space-x-3.5">

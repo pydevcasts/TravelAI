@@ -22,15 +22,7 @@ class CustomUser(AbstractUser):
     password = models.CharField(max_length=100)
     group = models.ForeignKey(CustomGroup, null=True, blank=True, on_delete=models.SET_NULL, related_name='users')
     username = None
-    STATUS_CHOICES = [
-        ('is_active', 'Active'),
-        ('is_superuser', 'Issuperuser'),
-        ('is_staff', 'Staff'),
-    ]
-    
-    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='active')
-
-    
+ 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 

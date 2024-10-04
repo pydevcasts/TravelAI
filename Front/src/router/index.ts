@@ -18,7 +18,8 @@ const routes = [
     name: 'eCommerce',
     component: ECommerceView,
     meta: {
-      title: 'eCommerce Dashboard'
+      title: 'eCommerce Dashboard',
+      requiresAuth: true 
     }
   },
   {
@@ -26,7 +27,8 @@ const routes = [
     name: 'profile',
     component: ProfileView,
     meta: {
-      title: 'Profile'
+      title: 'Profile',
+      requiresAuth: true 
     }
   },
 
@@ -51,7 +53,8 @@ const routes = [
     name: 'users',
     component: UsersView,
     meta: {
-      title: 'Users'
+      title: 'Users',
+      requiresAuth: true 
     }
   },
   {
@@ -112,18 +115,16 @@ const router = createRouter({
   }
 })
 
+
 router.beforeEach((to, from, next) => {
-  document.title = `Vue.js ${to.meta.title} | TailAdmin - Vue.js Tailwind CSS Dashboard Template`
-  next()
-})
-router.beforeEach((to, from, next)=>{
   const userStore = useUserStore();
-  const isAuthenticated =!! userStore.user;
-  if(to.name === "profile" && !isAuthenticated){
-    next({ name:'signin'})
-  }else {
-    next()
+  const isAuthenticated = userStore.isAuthenticated;
+
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    next('/signin');
+  } else {
+    next();
   }
-})
+});
 
 export default router
