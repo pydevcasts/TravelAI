@@ -41,7 +41,7 @@ class BostonHousingListCreateView(generics.ListCreateAPIView):
         try:
             # Make prediction
             predicted_price = model.predict(input_data)
-
+            
             # Save the prediction along with input data to the database
             prediction_instance = BostonHousing.objects.create(
                 crim=validated_data['crim'],

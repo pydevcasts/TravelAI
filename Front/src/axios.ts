@@ -25,8 +25,6 @@ instance.interceptors.response.use((response) => {
   // بررسی اینکه آیا خطا به دلیل توکن نامعتبر است
   if (error.response && error.response.data.code === 'token_not_valid') {
     const refreshToken = localStorage.getItem('refresh'); // توکن تازه را از storage بگیرید
-
-    console.log(refreshToken, 1111111111111111)
     if (refreshToken) {
       try {
         const response = await instance.post('/rest-auth/token/refresh/', { refresh: refreshToken });

@@ -13,6 +13,7 @@ data = pd.read_csv('/home/siyamak/Downloads/Meditation/Back/ML/housing_data.csv'
 X = data[['crim', 'zn', 'indus', 'chas', 'nox', 'rm', 'age', 'dis', 'rad', 'tax', 'ptratio', 'b', 'lstat']]
 y = data['medv']
 
+
 # بررسی و پر کردن مقادیر گمشده با استفاده از Imputer
 imputer = SimpleImputer(strategy='mean')  # یا 'median' یا 'most_frequent'
 X_imputed = imputer.fit_transform(X)  # پر کردن مقادیر گمشده در X

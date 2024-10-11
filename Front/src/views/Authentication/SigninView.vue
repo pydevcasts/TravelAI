@@ -1,4 +1,3 @@
-
 <template>
   <div class="flex items-center justify-center min-h-screen bg-gray-100">
     <DefaultAuthCard subtitle="Start for free" title="Sign In">
@@ -76,7 +75,7 @@ const login = async () => {
       userStore.setUser(userDetailsResponse.data);
     }
 
-    router.push('/profile');
+    router.push('/');
     toast.success("Login successful!", { timeout: 2000 });
   } catch (err) {
     handleLoginError(err);
