@@ -2,9 +2,10 @@ import { defineStore } from 'pinia';
 import instance from '../axios';
 
 interface User {
-  pk: number;
-  email: string;
-  // Add other user properties as needed
+    pk: number;
+    email: string;
+    first_name: string,
+    last_name: string
 }
 
 export const useUserStore = defineStore('user', {

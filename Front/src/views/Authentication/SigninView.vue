@@ -82,7 +82,7 @@ const login = async () => {
   }
 };
 
-const handleLoginError = (err) => {
+const handleLoginError = (err: any) => {
   if (err.response) {
     console.error('Response data:', err.response.data);
     toast.error(`Login failed: ${err.response.data.message || 'Unauthorized'}`, { timeout: 2000 });
@@ -91,7 +91,7 @@ const handleLoginError = (err) => {
   }
 };
 
-const getUserDetails = async (userId) => {
+const getUserDetails = async (userId: string | number) => {
   try {
     const response = await axios.get(`/api/users/${userId}`);
     return { success: true, data: response.data };
