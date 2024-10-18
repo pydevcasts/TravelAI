@@ -43,12 +43,12 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import axios from '@/axios';
 import { useUserStore } from '@/stores/userStore';
 import { useRouter } from 'vue-router';
 import { useToast } from "vue-toastification";
 import DefaultAuthCard from '@/components/Auths/DefaultAuthCard.vue';
 import InputGroup from '@/components/Auths/InputGroup.vue';
+import instance from '@/axios';
 
 const toast = useToast();
 const email = ref('');
@@ -59,7 +59,7 @@ const router = useRouter();
 
 const login = async () => {
   try {
-    const response = await axios.post('/rest-auth/login/', {
+    const response = await instance.post('/rest-auth/login/', {
       email: email.value,
       password: password.value,
     });
@@ -93,7 +93,7 @@ const handleLoginError = (err: any) => {
 
 const getUserDetails = async (userId: string | number) => {
   try {
-    const response = await axios.get(`/api/users/${userId}`);
+    const response = await instance.get(`/api/users/${userId}`);
     return { success: true, data: response.data };
   } catch (error) {
     console.error('Error fetching user details:', error);

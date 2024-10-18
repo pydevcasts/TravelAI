@@ -40,8 +40,15 @@ To run the project locally using Docker, follow these steps:
    cd TravelAI
 
    cd Back
-   source ./venv/bin/activate
+   # for linux
+   source ./venv/bin/activate 
+   # for win
+   source ./venv/Scripts/activate 
+   python manage.py makemigrations
+   python manage.py migrate
+   python manage.py createsuperuser
    python manage.py runserver
+   
    cd Front
    npm install
    npm run dev

@@ -20,7 +20,7 @@ class CustomUser(AbstractUser):
   
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
-    avatar = models.FileField(blank=True, null=True)
+    avatar = models.ImageField(upload_to = 'users/%Y/%m/%d', null = True, blank = True)
     group = models.ForeignKey(CustomGroup, null=True, blank=True, on_delete=models.SET_NULL, related_name='users')
     username = None
  
