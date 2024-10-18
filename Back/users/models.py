@@ -20,6 +20,7 @@ class CustomUser(AbstractUser):
   
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
+    avatar = models.FileField(blank=True, null=True)
     group = models.ForeignKey(CustomGroup, null=True, blank=True, on_delete=models.SET_NULL, related_name='users')
     username = None
  
@@ -27,6 +28,7 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects = UserManager()
+    
     def __str__(self):
         return self.email
 
