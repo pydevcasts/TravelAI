@@ -4,6 +4,7 @@ import {defineProps, onMounted, ref} from 'vue';
 import axios from '@/axios';
 import {useToast} from "vue-toastification";
 import {useRouter} from "vue-router";
+import instance from "@/axios";
 
 const toast = useToast();
 const router = useRouter();
@@ -16,7 +17,7 @@ const error = ref('');
 
 const onVerify = async () => {
   try {
-    await axios.post('/rest-auth/registration/verify-email/', {
+    await instance.post('/rest-auth/registration/verify-email/', {
       key: key.value,
     });
     toast.success("Your Email Verified.", {timeout: 2000});
@@ -29,7 +30,7 @@ const onVerify = async () => {
 
 const onResendKey = async () => {
   try {
-    await axios.post('/rest-auth/registration/resend-email/', {
+    await instance.post('/rest-auth/registration/resend-email/', {
       email: props.email,
     });
     setCounter()

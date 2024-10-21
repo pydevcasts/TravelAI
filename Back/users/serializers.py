@@ -21,8 +21,10 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['pk', 'email', 'first_name', 'last_name', 'avatar', 'is_staff', 'is_superuser', 'is_active', 'group', 'password']
 
     def create(self, validated_data):
+        if CustomUser.objects.filter(email=validated_data['email']).exists():
+            raise serializers.ValidationError("This email is already in use.")
         user = CustomUser(**validated_data)
-        user.set_password(validated_data['password'])
+        user.set_password(validated_data['password'])  # رمز عبور را هش کنید
         user.save()
         return user
 
