@@ -88,12 +88,8 @@ const handleLoginError = (err: any) => {
     </InputGroup>
 
     <div class="mb-5 mt-6">
-      <input
-          class="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 font-medium text-white transition hover:bg-opacity-90"
-          type="submit"
-          value="Create account"
-      />
-    </div>
+          <input type="submit" value="Sign Up" class="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 font-medium text-white transition hover:bg-opacity-90" />
+        </div>
 
     <button
         class="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 font-medium hover:bg-opacity-80 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-80"
