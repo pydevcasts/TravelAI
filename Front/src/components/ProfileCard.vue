@@ -48,7 +48,18 @@
           class="relative z-30 mx-auto -mt-22 h-30 w-full max-w-30 rounded-full bg-white/20 p-1 backdrop-blur sm:h-44 sm:max-w-44 sm:p-3"
       >
         <div class="relative drop-shadow-2">
-          <img alt="profile" src="@/assets/images/user/user-06.png"/>
+          <img
+  v-if="userStore.user.avatar"
+  :src="userStore.user.avatar"
+  alt="Profile Image"
+  class="rounded-full h-full w-full object-cover"
+/>
+<img
+  v-else
+  src="/src/assets/images/user/user-06.png"
+  alt="Default Profile Image"
+  class="rounded-full h-full w-full object-cover"
+/>
           <label
               class="absolute bottom-0 right-0 flex h-8.5 w-8.5 cursor-pointer items-center justify-center rounded-full bg-primary text-white hover:bg-opacity-90 sm:bottom-2 sm:right-2"
               for="profile"
