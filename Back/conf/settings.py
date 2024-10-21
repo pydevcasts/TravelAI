@@ -231,5 +231,5 @@ CORS_ALLOW_HEADERS = (
 )
 
 
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3  # Optional: Set expiration for confirmation
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3  # Optional: Set expiration for confirmation
