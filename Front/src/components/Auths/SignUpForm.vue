@@ -2,6 +2,7 @@
 import InputGroup from '@/components/Auths/InputGroup.vue'
 import {useToast} from "vue-toastification";
 import {ref} from 'vue'
+import instance from "@/axios.ts";
 
 const toast = useToast();
 const email = ref('');
@@ -14,7 +15,7 @@ const emits = defineEmits<{
 
 const onSignUp = async () => {
   try {
-    await axios.post('/rest-auth/registration/',
+    await instance.post('/rest-auth/registration/',
         {
           email: email.value,
           password1: password1.value,
