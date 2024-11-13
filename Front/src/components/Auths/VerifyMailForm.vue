@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import InputGroup from "@/components/Auths/InputGroup.vue";
 import {defineProps, onMounted, ref} from 'vue';
-import axios from '@/axios';
+import instance from '@/axios';
 import {useToast} from "vue-toastification";
 import {useRouter} from "vue-router";
 
@@ -16,7 +16,7 @@ const error = ref('');
 
 const onVerify = async () => {
   try {
-    await axios.post('/rest-auth/registration/verify-email/', {
+    await instance.post('/rest-auth/registration/verify-email/', {
       key: key.value,
     });
     toast.success("Your Email Verified.", {timeout: 2000});
@@ -29,7 +29,7 @@ const onVerify = async () => {
 
 const onResendKey = async () => {
   try {
-    await axios.post('/rest-auth/registration/resend-email/', {
+    await instance.post('/rest-auth/registration/resend-email/', {
       email: props.email,
     });
     setCounter()
