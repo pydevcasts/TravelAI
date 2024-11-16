@@ -35,6 +35,7 @@ urlpatterns = [
 
     re_path(r'^admin/', admin.site.urls),
     re_path(r'^api/', include('users.urls')),
+    re_path(r'^api/categories/', include('category.urls')),
     re_path(r'^api/predict/', include('predict.urls')),
     re_path(r'^rest-auth/', include('dj_rest_auth.urls')),
     re_path(r'^rest-auth/registration/', include('dj_rest_auth.registration.urls')),

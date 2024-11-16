@@ -38,10 +38,12 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',
-    'users',
     'django_filters',
     'corsheaders', 
-    'predict.apps.PredictConfig'
+
+    'users',
+    'category',
+    'predict'
 ]
 
 SITE_ID = 1
@@ -139,7 +141,7 @@ STATICFILES_DIRS = (
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media','upload')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
