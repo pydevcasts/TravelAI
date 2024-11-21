@@ -170,5 +170,8 @@ dist/
 npm-debug.log
 yarn-error.log
 
-
+upload/
+/upload/
+/upload/*
+./upload/
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Vuejs,typescript

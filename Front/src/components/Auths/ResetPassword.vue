@@ -3,7 +3,8 @@ import InputGroup from "@/components/Auths/InputGroup.vue";
 import { ref} from 'vue';
 import instance from '@/axios';
 import {useToast} from "vue-toastification";
-
+import { useRouter } from 'vue-router';
+const router = useRouter();
 const toast = useToast();
 const email = ref('');
 const error = ref('');
@@ -11,10 +12,13 @@ const error = ref('');
 
 const onResetPassword = async () => {
   try {
-    await instance.post('/rest-auth/password/reset/', {
+    const response = await instance.post('/rest-auth/password/reset/', {
       email: email.value,
+    }).then((res)=>{
+
+      toast.success("An Email Sent To You, Please Check Your Email", {timeout: 2000});
+      router.push('/new-password');
     });
-    toast.success("An Email Sent To You, Please Check Your Email", {timeout: 2000});
 
   } catch (err) {
     handleLoginError(err);

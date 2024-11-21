@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import InputGroup from "@/components/Auths/InputGroup.vue";
 import {defineProps, onMounted, ref} from 'vue';
-import instance from '@/axios';
 import {useToast} from "vue-toastification";
 import {useRouter} from "vue-router";
+import instance from "@/axios";
 
 const toast = useToast();
 const router = useRouter();
