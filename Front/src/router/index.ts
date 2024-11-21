@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import SigninView from '@/views/Authentication/SigninView.vue'
 import SignupView from '@/views/Authentication/SignupView.vue'
+import NewPasswordView from "@/views/Authentication/NewPasswordView.vue";
 import BasicChartView from '@/views/Charts/BasicChartView.vue'
 import ECommerceView from '@/views/Dashboard/ECommerceView.vue'
 // import FormElementsView from '@/views/Forms/FormElementsView.vue'
@@ -103,6 +104,13 @@ const routes = [
     component: SignupView,
     meta: {
       title: 'Signup'
+    }},
+  {
+    path: '/new-password',
+    name: 'new-password',
+    component: NewPasswordView,
+    meta: {
+      title: 'New Password'
     }
   }
 ]

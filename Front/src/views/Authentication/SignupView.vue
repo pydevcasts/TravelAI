@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import DefaultAuthCard from '@/components/Auths/DefaultAuthCard.vue'
 import SignUpForm from "@/components/Auths/SignUpForm.vue";
-import VerifyMailForm from "@/components/Auths/VerifyMailForm.vue";
+// import VerifyMailForm from "@/components/Auths/VerifyMailForm.vue";
 import {ref} from 'vue'
 
 const pageTitle = ref('Sign Up')
@@ -19,7 +19,7 @@ const setMail = (payload: string) => {
 
     <DefaultAuthCard :title="pageTitle" subtitle="Start for free">
       <SignUpForm v-if="showSignUpForm" @setMail="setMail"/>
-      <VerifyMailForm v-else :email="email"/>
+      <!-- <VerifyMailForm v-else :email="email"/> -->
     </DefaultAuthCard>
 
   </div>

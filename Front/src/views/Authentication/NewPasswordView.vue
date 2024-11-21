@@ -1,37 +1,51 @@
 <script setup lang="ts">
 import DefaultAuthCard from "@/components/Auths/DefaultAuthCard.vue";
-import {ref} from "vue";
+import { ref } from "vue";
 import InputGroup from "@/components/Auths/InputGroup.vue";
 import instance from "@/axios";
-import {useToast} from "vue-toastification";
-import {useRouter} from "vue-router";
+import { useToast } from "vue-toastification";
+import { useRouter } from "vue-router";
 
 const toast = useToast();
 const router = useRouter();
-const pageTitle = ref('Reset Password')
-const newPassword1 = ref('')
-const newPassword2 = ref('')
+const pageTitle = ref('Reset Password');
+const newPassword1 = ref('');
+const newPassword2 = ref('');
 const error = ref('');
 
 const changePassword = async () => {
+  // Check if passwords match
+  if (newPassword1.value !== newPassword2.value) {
+    toast.error("Passwords do not match.", { timeout: 2000 });
+    return;
+  }
+
   try {
- await instance.post('/rest-auth/password/change/',
-        {
-          new_password1: newPassword1.value,
-          new_password2: newPassword2.value
-        })
-    toast.success(`Your Password Changed Successfully.`, {timeout: 2000});
-    router.push('/')
+    const response = await instance.post('/rest-auth/password/change/', {
+      new_password1: newPassword1.value,
+      new_password2: newPassword2.value
+    });
+
+    console.log(response);
+    toast.success("Your Password Changed Successfully.", { timeout: 2000 });
+    router.push('/');
   } catch (err) {
     handleLoginError(err);
   }
 }
+
 const handleLoginError = (err: any) => {
   if (err.response) {
     console.error('Response data:', err.response.data);
-    toast.error(`failed: ${err.response.data.message || 'Unauthorized'}`, {timeout: 2000});
+    if (err.response.status === 401) {
+      toast.error("Unauthorized: Please log in again.", { timeout: 2000 });
+      // Optionally redirect to login page
+      router.push('/signin');
+    } else {
+      toast.error(`Failed: ${err.response.data.message || 'An error occurred'}`, { timeout: 2000 });
+    }
   } else {
-    error.value = 'failed. Please try again.';
+    error.value = 'Failed. Please try again.';
   }
 }
 </script>
