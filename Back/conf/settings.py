@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
+import logging
 from pathlib import Path
 from datetime import timedelta
 
@@ -18,8 +19,9 @@ SECRET_KEY = 'django-insecure-avo+t3__x%nivtn&(73d0gc!8sg5)#0_fjg8(^rdxww4n_cdn^
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["*", "0.0.0.0"]
+ALLOWED_HOSTS = ["*", "0.0.0.0","127.0.0.1"]
 
+logger = logging.getLogger('django')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -110,7 +112,7 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "pydevcasts@gmail.com"
-EMAIL_HOST_PASSWORD = "*****"
+EMAIL_HOST_PASSWORD = "yjbz fsim gaxi xeuj"
 EMAIL_USE_TLS = True
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -185,6 +187,7 @@ LOGIN_URL = 'http://localhost:8000/rest-auth/login/'
 LOGGING = {
     'version': 1,
     'disable_extras': False,
+    'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
