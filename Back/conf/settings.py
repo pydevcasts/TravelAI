@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'users',
     'category',
     'predict',
+    'about',
+    'contactus',
     
 ]
 
