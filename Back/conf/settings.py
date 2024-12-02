@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'category',
     'predict',
     
+    
 ]
 
 SITE_ID = 1
