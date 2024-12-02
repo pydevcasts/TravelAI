@@ -4,7 +4,7 @@ from django.db import models
 class About(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
-    image = models.ImageField(blank=True, null=True)
+    image = models.ImageField(blank=True, null=True,upload_to='about/%Y/%m/%d')
     Establishment = models.PositiveIntegerField()# تاسیس 
     icon = models.CharField(max_length=100)
 
