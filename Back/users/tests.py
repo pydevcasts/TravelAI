@@ -1,29 +1,29 @@
 
 
 # Create your tests here.
-from django.urls import resolve, reverse
+import json
+from django.urls import  reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 from django.contrib.auth import get_user_model
-from rest_framework.authtoken.models import Token
-import json
-User = get_user_model()
 from rest_framework.test import APIClient
+User = get_user_model()
+
 
 
 class LoginTests(APITestCase):
     def setUp(self):
         # ایجاد یک کاربر جدید برای تست
-        self.username = 'admin'
+        # self.username = 'admin'
         self.email = "admin@gmail.com"
         self.password = 'admin'
-        self.user = User.objects.create_user(username=self.username,email=self.email, password=self.password)
+        self.user = User.objects.create_user(email=self.email, password=self.password)
 
     def test_login(self):
         url = reverse('rest_login') 
         data = {
             'email': self.email,
-            'username': self.username,
+            # 'username': self.username,
             'password': self.password
         }
         

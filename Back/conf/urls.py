@@ -37,9 +37,12 @@ urlpatterns = [
     re_path(r'^api/', include('users.urls')),
     re_path(r'^api/categories/', include('category.urls')),
     re_path(r'^api/predict/', include('predict.urls')),
+    re_path(r'^api/about/', include('about.urls')),
+    re_path(r'^api/contactus/', include('contactus.urls')),
     re_path(r'^rest-auth/', include('dj_rest_auth.urls')),
     re_path(r'^rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     re_path(r'^rest-auth/account-confirm-email/(?P<key>[-:\w]+)/$',  ConfirmEmailView.as_view(), name='account_confirm_email'),
     re_path(r'^rest-auth/account-confirm-email/', VerifyEmailView.as_view(), name='account_email_verification_sent'),
     re_path(r'^rest-auth/password/reset/confirm/(?P<uidb64>[-\w]+)/(?P<token>[-\w]+)/$', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
