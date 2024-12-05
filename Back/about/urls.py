@@ -7,7 +7,7 @@ app_name = "about"
 
 
 router = routers.SimpleRouter()
-router.register('about', AboutViewSet, basename='about')
+router.register('', AboutViewSet, basename='about')
 urlpatterns = [
     path("", include(router.urls)),
 ]

@@ -5,11 +5,12 @@ from contactus.models import Contactus
 from contactus.serializers import ContactusSerializer
 from django.core.mail import send_mail
 from django.contrib import messages
-
+from rest_framework.permissions import AllowAny
 # Create your views here.
 class ContactusViewSet(ModelViewSet):
     queryset = Contactus.objects.all()
     serializer_class = ContactusSerializer
+    permission_classes = [AllowAny]
 
     def create(self, request, *args, **kwargs):
         if request.method == "POST":

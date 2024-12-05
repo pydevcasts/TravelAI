@@ -7,7 +7,7 @@ app_name = "contactus"
 
 
 router = routers.SimpleRouter()
-router.register('contactus', ContactusViewSet, basename='contactus')
+router.register('', ContactusViewSet, basename='contactus')
 urlpatterns = [
     path("", include(router.urls)),
 ]
