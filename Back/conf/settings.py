@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'predict',
     'about',
     'contactus',
+    'tag'
     
     
 ]
