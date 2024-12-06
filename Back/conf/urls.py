@@ -39,11 +39,8 @@ urlpatterns = [
     re_path(r'^api/predict/', include('predict.urls')),
     re_path(r'^api/about/', include('about.urls')),
     re_path(r'^api/contactus/', include('contactus.urls')),
-<<<<<<< HEAD
     re_path(r'^api/account/', include('allauth.urls')),
-=======
     re_path(r'^api/tag/', include('tag.urls')),
->>>>>>> origin
     re_path(r'^rest-auth/', include('dj_rest_auth.urls')),
     re_path(r'^rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     re_path(r'^rest-auth/account-confirm-email/(?P<key>[-:\w]+)/$',  ConfirmEmailView.as_view(), name='account_confirm_email'),
