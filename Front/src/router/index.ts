@@ -9,10 +9,12 @@ import ECommerceView from '@/views/Dashboard/ECommerceView.vue'
 import PredictView from '@/views/Predict/PredictView.vue'
 import SettingsView from '@/views/Pages/SettingsView.vue'
 import ProfileView from '@/views/users/ProfileView.vue'
+import TagView from '@/views/Tag/TagView.vue'
 import UsersView from '@/views/users/UsersView.vue'
 import AlertsView from '@/views/UiElements/AlertsView.vue'
 import ButtonsView from '@/views/UiElements/ButtonsView.vue'
 import { useUserStore } from '@/stores/userStore';
+
 const routes = [
   {
     path: '/',
@@ -29,6 +31,15 @@ const routes = [
     component: ProfileView,
     meta: {
       title: 'Profile',
+      requiresAuth: true 
+    }
+  },
+  {
+    path: '/tag',
+    name: 'tag',
+    component: TagView,
+    meta: {
+      title: 'tag',
       requiresAuth: true 
     }
   },

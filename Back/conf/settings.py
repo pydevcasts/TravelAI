@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'django_filters',
     'corsheaders', 
+    'allauth.socialaccount.providers.google',
 
     'users',
     'category',
@@ -245,3 +246,21 @@ CORS_ALLOW_HEADERS = (
 
 # ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 # ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3  # Optional: Set expiration for confirmation
+
+#social login setting
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP':{
+            'client_id':'228488379476-gq1kf7e39hha7ce5d23tq5hreat6p3ga.apps.googleusercontent.com',
+            'secret':'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',
+        },
+        'SCOPE':['profile','email',],
+        'AUTH_PARAMS':{'access_type','online',},
+        'METHOD':'oauth2',
+        'VERIFIED_EMAIL':True,
+    },
+}
+
+SOCIALACCOUNT_LOGIN_ON_GET = True
+LOGIN_REDIRECT_URL = "success"
