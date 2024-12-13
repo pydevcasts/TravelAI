@@ -23,7 +23,7 @@ describe('<SigninView />', () => {
       body: { /* your mock user data */ }
     }).as('getUserRequest');
   });
-  
+
 
   it('renders the login form', () => {
     mount(SigninView);
@@ -79,7 +79,7 @@ describe('<SigninView />', () => {
     cy.get('input[type="submit"]').click();
 
     cy.wait('@loginRequestFailed');
-    
+
 
   });
 });

@@ -7,28 +7,35 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='BostonHousing',
+            name="BostonHousing",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('crim', models.FloatField()),
-                ('zn', models.FloatField()),
-                ('indus', models.FloatField()),
-                ('chas', models.IntegerField()),
-                ('nox', models.FloatField()),
-                ('rm', models.FloatField()),
-                ('age', models.FloatField()),
-                ('dis', models.FloatField()),
-                ('rad', models.IntegerField()),
-                ('tax', models.FloatField()),
-                ('ptratio', models.FloatField()),
-                ('b', models.FloatField()),
-                ('lstat', models.FloatField()),
-                ('medv', models.FloatField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("crim", models.FloatField()),
+                ("zn", models.FloatField()),
+                ("indus", models.FloatField()),
+                ("chas", models.IntegerField()),
+                ("nox", models.FloatField()),
+                ("rm", models.FloatField()),
+                ("age", models.FloatField()),
+                ("dis", models.FloatField()),
+                ("rad", models.IntegerField()),
+                ("tax", models.FloatField()),
+                ("ptratio", models.FloatField()),
+                ("b", models.FloatField()),
+                ("lstat", models.FloatField()),
+                ("medv", models.FloatField()),
             ],
         ),
     ]

@@ -2,6 +2,7 @@
 
 from django.db import models
 
+
 class BostonHousing(models.Model):
     crim = models.FloatField()
     zn = models.FloatField()
@@ -16,7 +17,7 @@ class BostonHousing(models.Model):
     ptratio = models.FloatField()
     b = models.FloatField()
     lstat = models.FloatField()
-    medv = models.FloatField(blank=True, null=True)  
+    medv = models.FloatField(blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
 

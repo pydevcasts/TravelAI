@@ -5,7 +5,7 @@ import { ref, onMounted } from 'vue';
 import { useToast } from "vue-toastification";
 
 const users = ref([
-     
+
     ]);
 const userStore = useUserStore();
 const toast = useToast();
@@ -15,10 +15,10 @@ const editUser = (userId: number) => {
 const deleteUser = async (userId: number) => {
   try {
     console.log(`Delete user with ID: ${userId}`);
-    
+
     // Make the DELETE request to delete the user
     const response = await instance.delete(`/api/users/${userId}/`);
-    
+
     if (response.status === 204) { // Check if the deletion was successful
       console.log(`User with ID: ${userId} deleted successfully.`);
       // Clear user state in Pinia store
@@ -39,7 +39,7 @@ const fetchUsers = async () => {
   const response = await instance.get('/api/users/');
   users.value = response.data;
   console.log('Fetching users...', response);
-  
+
 };
 const statusClass = (user) => {
       if (user.is_superuser) {
@@ -55,7 +55,7 @@ const statusClass = (user) => {
 
 onMounted(() => {
   fetchUsers(); // Fetch users when the component mounts
-  
+
 });
 
 </script>
@@ -123,7 +123,7 @@ onMounted(() => {
                   </svg>
                 </button>
 
-             
+
               </div>
             </td>
           </tr>

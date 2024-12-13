@@ -40,7 +40,7 @@ const validateInputs = () => {
 
 const predict = async (event: Event) => {
   event.preventDefault(); // Prevent default form submission
-  
+
   if (!validateInputs()) {
     return; // Stop if inputs are not valid
   }
@@ -63,7 +63,7 @@ const predict = async (event: Event) => {
       b: b.value,
       lstat: lstat.value,
     });
-    
+
     const token = localStorage.getItem('access');
     const response = await instance.post('/api/predict/', {
       crim: Number(crim.value),
@@ -80,7 +80,7 @@ const predict = async (event: Event) => {
       b: Number(b.value),
       lstat: Number(lstat.value),
     },
-  
+
     );
 
     predictedPrice.value = response.data.predicted_price;
