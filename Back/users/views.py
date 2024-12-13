@@ -1,15 +1,16 @@
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
-from .models import CustomUser,  CustomGroup, Rating, Request, Trip
+from .models import CustomUser, CustomGroup, Rating, Request, Trip
 from .serializers import RatingSerializer, RequestSerializer, TripSerializer, UserSerializer, GroupSerializer
 from .filters import GroupFilter, UserFilter
 from rest_framework.permissions import IsAdminUser
 from rest_framework import status
 from rest_framework.response import Response
+from .standardresponse import StandardResponseMixin
 
 
-class CustomUserViewSet(viewsets.ModelViewSet):
+class CustomUserViewSet(StandardResponseMixin, viewsets.ModelViewSet):
     queryset = CustomUser.objects.select_related('group').all()
     serializer_class = UserSerializer
     filter_backends = (DjangoFilterBackend,)
@@ -20,8 +21,8 @@ class CustomUserViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             self.perform_create(serializer)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return self.success_response(data=serializer.data,user=request.user,status=status.HTTP_201_CREATED)
+        return self.error_response(errors=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class GroupViewSet(viewsets.ModelViewSet):
@@ -37,7 +38,6 @@ class GroupViewSet(viewsets.ModelViewSet):
             return CustomGroup.objects.all()
         else:
             return CustomGroup.objects.filter(status=True)
-
 
 
 class TripViewSet(viewsets.ModelViewSet):
