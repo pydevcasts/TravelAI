@@ -17,12 +17,39 @@ class CustomUserViewSet(StandardResponseMixin, viewsets.ModelViewSet):
     filterset_class = UserFilter
     permission_classes = [IsAdminUser]
 
+    def list(self, request, *args, **kwargs):
+        queryset = CustomUser.objects.all()
+        serializer = self.get_serializer(queryset, many=True)
+        return self.success_response(data=serializer.data, user=request.user, status=status.HTTP_200_OK)
+
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             self.perform_create(serializer)
-            return self.success_response(data=serializer.data,user=request.user,status=status.HTTP_201_CREATED)
+            return self.success_response(data=serializer.data, user=request.user, status=status.HTTP_201_CREATED)
         return self.error_response(errors=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def update(self, request, *args, **kwargs):  # For PUT
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        if serializer.is_valid():
+            self.perform_update(serializer)
+            return self.success_response(data=serializer.data, user=request.user, status=status.HTTP_200_OK)
+        return self.error_response(errors=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def partial_update(self, request, *args, **kwargs):  # For PATCH
+        kwargs['partial'] = True
+        return self.update(request, *args, **kwargs)
+
+    def destroy(self, request, *args, **kwargs):  # For DELETE
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return self.success_response(
+            data={"message": f"User with ID {instance.id} has been deleted."},
+            user=request.user,
+            status=status.HTTP_204_NO_CONTENT
+        )
 
 
 class GroupViewSet(viewsets.ModelViewSet):
