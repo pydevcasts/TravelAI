@@ -143,14 +143,16 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'media', 'static'),
-)
+# Static files settings
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # مسیر فایل‌های استاتیک سفارشی
+]
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # مسیر جمع‌آوری فایل‌های استاتیک توسط collectstatic
+
+# Media files settings
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media','upload')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # مسیر نگهداری فایل‌های آپلود شده
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -162,8 +164,10 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
-    )
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
 }
+
 REST_AUTH = {
     'USE_JWT': True,
     'JWT_AUTH_COOKIE': 'access',
@@ -171,10 +175,11 @@ REST_AUTH = {
     'JWT_AUTH_HTTPONLY':False
 }
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': True,  # فعال‌سازی چرخش توکن‌های تازه
     'BLACKLIST_AFTER_ROTATION': True,  # فعال‌سازی لیست سیاه برای توکن‌های قدیمی
+    "AUTH_HEADER_TYPES": ("Bearer",),
 }
 
 AUTHENTICATION_BACKENDS = [
