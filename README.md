@@ -41,14 +41,14 @@ To run the project locally using Docker, follow these steps:
 
    cd Back
    # for linux
-   source ./venv/bin/activate 
+   source ./venv/bin/activate
    # for win
-   source ./venv/Scripts/activate 
+   source ./venv/Scripts/activate
    python manage.py makemigrations
    python manage.py migrate
    python manage.py createsuperuser
    python manage.py runserver
-   
+
    cd Front
    npm install
    npm run dev

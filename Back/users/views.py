@@ -1,16 +1,21 @@
-from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets
-from .models import CustomUser,  CustomGroup, Rating, Request, Trip
-from .serializers import RatingSerializer, RequestSerializer, TripSerializer, UserSerializer, GroupSerializer
-from .filters import GroupFilter, UserFilter
+from rest_framework import filters, status, viewsets
 from rest_framework.permissions import IsAdminUser
-from rest_framework import status
 from rest_framework.response import Response
+
+from .filters import GroupFilter, UserFilter
+from .models import CustomGroup, CustomUser, Rating, Request, Trip
+from .serializers import (
+    GroupSerializer,
+    RatingSerializer,
+    RequestSerializer,
+    TripSerializer,
+    UserSerializer,
+)
 
 
 class CustomUserViewSet(viewsets.ModelViewSet):
-    queryset = CustomUser.objects.select_related('group').all()
+    queryset = CustomUser.objects.select_related("group").all()
     serializer_class = UserSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = UserFilter
@@ -27,9 +32,9 @@ class CustomUserViewSet(viewsets.ModelViewSet):
 class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
     filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
-    filterset_fields = ['min_participants', 'max_participants', 'name']
-    ordering_fields = ['name', 'min_participants', 'max_participants']
-    ordering = ['name']  # Default ordering
+    filterset_fields = ["min_participants", "max_participants", "name"]
+    ordering_fields = ["name", "min_participants", "max_participants"]
+    ordering = ["name"]  # Default ordering
     filterset_class = GroupFilter
 
     def get_queryset(self):
@@ -37,7 +42,6 @@ class GroupViewSet(viewsets.ModelViewSet):
             return CustomGroup.objects.all()
         else:
             return CustomGroup.objects.filter(status=True)
-
 
 
 class TripViewSet(viewsets.ModelViewSet):

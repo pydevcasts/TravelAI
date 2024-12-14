@@ -11,6 +11,7 @@ import SettingsView from '@/views/Pages/SettingsView.vue'
 import ProfileView from '@/views/users/ProfileView.vue'
 import CreateTagView from '@/views/Tag/CreateTagView.vue'
 import TagListView from '@/views/Tag/TagListView.vue'
+import UpdateTagView from '@/views/Tag/UpdateTagView.vue'
 import UsersView from '@/views/users/UsersView.vue'
 import AlertsView from '@/views/UiElements/AlertsView.vue'
 import ButtonsView from '@/views/UiElements/ButtonsView.vue'
@@ -23,7 +24,7 @@ const routes = [
     component: ECommerceView,
     meta: {
       title: 'eCommerce Dashboard',
-      requiresAuth: true 
+      requiresAuth: true
     }
   },
   {
@@ -32,7 +33,7 @@ const routes = [
     component: ProfileView,
     meta: {
       title: 'Profile',
-      requiresAuth: true 
+      requiresAuth: true
     }
   },
   {
@@ -58,6 +59,15 @@ const routes = [
         component: CreateTagView,
         meta: {
           title: 'Create Tag',
+          requiresAuth: true
+        }
+      },
+      {
+        path: '/tags/:id/',
+        name: 'updateTag',
+        component: UpdateTagView,
+        meta: {
+          title: 'Update Tag',
           requiresAuth: true
         }
       }
@@ -86,7 +96,7 @@ const routes = [
     component: UsersView,
     meta: {
       title: 'Users',
-      requiresAuth: true 
+      requiresAuth: true
     }
   },
   {

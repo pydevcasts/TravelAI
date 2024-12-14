@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   app:
-    build: 
+    build:
       context: ./Nextera/
       args:
         no_cache: "true"
@@ -11,7 +11,7 @@ services:
     volumes:
       - ./Nextera:/code
     ports:
-      - "8000:8000"  
+      - "8000:8000"
     networks:
       - main
     restart: always
@@ -30,8 +30,8 @@ services:
       - POSTGRES_USER=nextera
       - POSTGRES_PASSWORD=nextera
       - POSTGRES_HOST_AUTH_METHOD=trust
-     
-  
+
+
     ports:
       - "5432:5432"
     networks:
@@ -46,7 +46,7 @@ services:
     networks:
       - main
     ports:
-      - "80:80"  
+      - "80:80"
       - "443:443"
     restart: always
     volumes:

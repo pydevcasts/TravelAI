@@ -2,7 +2,7 @@ Django:
 
 python -m venv venv
 
-source ./venv/bin/activate 
+source ./venv/bin/activate
 
 pip install -r requirements.txt
 
@@ -14,9 +14,9 @@ Docker:
 
 docker-compose build
 
-docker-compose up 
+docker-compose up
 
-or 
+or
 
 ./command.sh
 

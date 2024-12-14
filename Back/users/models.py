@@ -1,6 +1,5 @@
+from django.contrib.auth.models import AbstractUser, Group
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.models import Group
 from users.manager import UserManager
 
 
@@ -8,7 +7,7 @@ class CustomGroup(Group):
     min_participants = models.PositiveIntegerField(default=1)
     max_participants = models.PositiveIntegerField(default=10)
     status = models.BooleanField(default=True)  # True for active, False for inactive
-   
+
     def user_count(self):
         return self.users.count()
 
@@ -17,18 +16,24 @@ class CustomGroup(Group):
 
 
 class CustomUser(AbstractUser):
-  
+
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
-    avatar = models.ImageField(upload_to = 'users/%Y/%m/%d', null = True, blank = True)
-    group = models.ForeignKey(CustomGroup, null=True, blank=True, on_delete=models.SET_NULL, related_name='users')
+    avatar = models.ImageField(upload_to="users/%Y/%m/%d", null=True, blank=True)
+    group = models.ForeignKey(
+        CustomGroup,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="users",
+    )
     username = None
- 
-    USERNAME_FIELD = 'email'
+
+    USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
     objects = UserManager()
-    
+
     def __str__(self):
         return self.email
 
@@ -39,20 +44,24 @@ class Trip(models.Model):
     departure_time = models.DateTimeField()
     available_seats = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=20, default='active')  # active, inactive
+    status = models.CharField(max_length=20, default="active")  # active, inactive
 
     def __str__(self):
         return f"{self.user.username} - {self.destination} at {self.departure_time}"
 
+
 class Request(models.Model):
     trip = models.ForeignKey(Trip, on_delete=models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    status = models.CharField(max_length=20, default='pending')  # pending, accepted, rejected
+    status = models.CharField(
+        max_length=20, default="pending"
+    )  # pending, accepted, rejected
     created_at = models.DateTimeField(auto_now_add=True)
     notes = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f"Request by {self.user.username} for {self.trip.destination}"
+
 
 class Rating(models.Model):
     trip = models.ForeignKey(Trip, on_delete=models.CASCADE)
@@ -62,4 +71,6 @@ class Rating(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Rating by {self.user.username} for {self.trip.destination}: {self.score}"
+        return (
+            f"Rating by {self.user.username} for {self.trip.destination}: {self.score}"
+        )

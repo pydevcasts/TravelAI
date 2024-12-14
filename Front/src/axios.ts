@@ -31,17 +31,17 @@ instance.interceptors.response.use((response) => {
         localStorage.setItem('access', response.data.access); // توکن جدید را ذخیره کنید
         // به روز رسانی هدر Authorization در درخواست اصلی
         originalRequest.headers.Authorization = `Bearer ${response.data.access}`;
-        
+
         // دوباره درخواست اصلی را ارسال کنید
         return instance(originalRequest);
       } catch (refreshError) {
         console.error('Failed to refresh token:', refreshError);
         // کاربر را به صفحه ورود هدایت کنید
-        window.location.href = '/signin'; 
+        window.location.href = '/signin';
       }
     }
   }
-  
+
   return Promise.reject(error);
 });
 
