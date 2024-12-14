@@ -9,7 +9,8 @@ import ECommerceView from '@/views/Dashboard/ECommerceView.vue'
 import PredictView from '@/views/Predict/PredictView.vue'
 import SettingsView from '@/views/Pages/SettingsView.vue'
 import ProfileView from '@/views/users/ProfileView.vue'
-import TagView from '@/views/Tag/TagView.vue'
+import CreateTagView from '@/views/Tag/CreateTagView.vue'
+import TagListView from '@/views/Tag/TagListView.vue'
 import UsersView from '@/views/users/UsersView.vue'
 import AlertsView from '@/views/UiElements/AlertsView.vue'
 import ButtonsView from '@/views/UiElements/ButtonsView.vue'
@@ -35,13 +36,32 @@ const routes = [
     }
   },
   {
-    path: '/tag',
-    name: 'tag',
-    component: TagView,
+    path: '/tags/',
+    // component: TagContainer, // Optional: a wrapper component to hold child views
     meta: {
-      title: 'tag',
-      requiresAuth: true 
-    }
+      title: 'Tags',
+      requiresAuth: true // Assuming you have authentication
+    },
+    children: [
+      {
+        path: '',
+        name: 'tag-list',
+        component: TagListView,
+        meta: {
+          title: 'Tag List',
+          requiresAuth: true
+        }
+      },
+      {
+        path: 'create/',
+        name: 'create',
+        component: CreateTagView,
+        meta: {
+          title: 'Create Tag',
+          requiresAuth: true
+        }
+      }
+    ]
   },
 
   // {
