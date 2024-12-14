@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'about',
     'contactus',
     'tag',
+    'blog',
     
     
 ]

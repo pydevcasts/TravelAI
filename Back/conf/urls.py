@@ -39,6 +39,7 @@ urlpatterns = [
     re_path(r'^api/predict/', include('predict.urls')),
     re_path(r'^api/about/', include('about.urls')),
     re_path(r'^api/contactus/', include('contactus.urls')),
+    re_path(r'^api/blog/', include('blog.urls')),
     re_path(r'^api/account/', include('allauth.urls')),
     re_path(r'^api/tag/', include('tag.urls')),
     re_path(r'^rest-auth/', include('dj_rest_auth.urls')),
