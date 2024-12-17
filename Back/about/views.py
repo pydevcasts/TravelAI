@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-from rest_framework.viewsets import ModelViewSet
-=======
->>>>>>> master
 from about.models import About
 from about.serializers import AboutSerializer
 from django.shortcuts import render
@@ -13,10 +9,8 @@ class AboutViewSet(ModelViewSet):
     queryset = About.objects.all()
     serializer_class = AboutSerializer
     search_fields = [
-<<<<<<< HEAD
-        'title', 'description',
-=======
+        'description',
         "title",
         "content",
->>>>>>> master
+
     ]
