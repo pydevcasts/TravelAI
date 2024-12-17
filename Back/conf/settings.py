@@ -24,37 +24,6 @@ ALLOWED_HOSTS = ["*", "0.0.0.0", "127.0.0.1"]
 logger = logging.getLogger("django")
 
 INSTALLED_APPS = [
-<<<<<<< HEAD
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'drf_yasg',
-
-    'rest_framework',
-    'rest_framework.authtoken',
-    'dj_rest_auth',
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'dj_rest_auth.registration',
-    'django_filters',
-    'corsheaders', 
-    'allauth.socialaccount.providers.google',
-
-    'users',
-    'category',
-    'predict',
-    'about',
-    'contactus',
-    'tag',
-    'blog',
-    
-    
-=======
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -79,7 +48,8 @@ INSTALLED_APPS = [
     "about",
     "contactus",
     "tag",
->>>>>>> master
+    'blog',
+
 ]
 
 SITE_ID = 1
