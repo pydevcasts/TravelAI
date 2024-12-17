@@ -9,6 +9,8 @@ class AboutViewSet(ModelViewSet):
     queryset = About.objects.all()
     serializer_class = AboutSerializer
     search_fields = [
+        'description',
         "title",
         "content",
+
     ]
