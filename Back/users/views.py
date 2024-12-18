@@ -8,6 +8,8 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework import status
 from rest_framework.response import Response
 from .standardresponse import StandardResponseMixin
+from dj_rest_auth.registration.views import RegisterView
+from dj_rest_auth.views import LoginView
 
 
 class CustomUserViewSet(StandardResponseMixin, viewsets.ModelViewSet):
@@ -80,3 +82,21 @@ class RequestViewSet(viewsets.ModelViewSet):
 class RatingViewSet(viewsets.ModelViewSet):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
+
+
+class CustomLoginView(StandardResponseMixin, LoginView):
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        if response.status_code == status.HTTP_200_OK:
+            return self.success_response(data=response.data, user=request.user, status=status.HTTP_200_OK)
+        else:
+            return self.error_response(errors=response.errors, status=response.status_code)
+
+
+class CustomRegisterView(RegisterView, StandardResponseMixin):
+    def create(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        if response.status_code == status.HTTP_201_CREATED:
+            return self.success_response(data=response.data, user=request.user, status=status.HTTP_201_CREATED)
+        else:
+            return self.error_response(errors=response.errors, status=response.status_code)
