@@ -19,6 +19,7 @@
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
+// @ts-ignore
 import { mount } from 'cypress/vue'
 
 // Augment the Cypress namespace to include type definitions for
@@ -33,6 +34,7 @@ declare global {
   }
 }
 
+// @ts-ignore
 Cypress.Commands.add('mount', mount)
 
 // Example use:
