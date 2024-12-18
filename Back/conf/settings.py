@@ -154,6 +154,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # مسیر جمع‌آور�
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # مسیر نگهداری فایل‌های آپلود شده
 
+ACCOUNT_SIGNUP_REDIRECT_URL = '/rest-auth/registration/verify-email/'
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
