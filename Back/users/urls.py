@@ -3,6 +3,7 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
+
 from .views import (
     CustomUserViewSet,
     GroupViewSet,
@@ -10,6 +11,7 @@ from .views import (
     RequestViewSet,
     TripViewSet,
 )
+
 
 router = DefaultRouter()
 router.register(r"users", CustomUserViewSet)
@@ -19,5 +21,7 @@ router.register(r"requests", RequestViewSet)
 router.register(r"ratings", RatingViewSet)
 
 urlpatterns = [
-    path("", include(router.urls)),
+    path('', include(router.urls)),
+    path('rest-auth/login/', CustomLoginView.as_view(), name='custom_login'),
+
 ]
