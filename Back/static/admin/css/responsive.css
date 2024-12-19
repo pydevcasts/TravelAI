@@ -874,7 +874,10 @@ input[type="submit"], button {
     }
 
     /* Calendar and clock */
+
+
 /*
+
     .calendarbox, .clockbox {
         position: fixed !important;
         top: 50% !important;
@@ -945,7 +948,7 @@ input[type="submit"], button {
     .calendarbox .calendarnav-previous, .calendarbox .calendarnav-next {
         z-index: 1;
         top: 10px;
-    } */
+    }
 
     /* History */
 
