@@ -1,19 +1,27 @@
-from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets
+
 from .models import CustomUser, CustomGroup, Rating, Request, Trip
-from .serializers import RatingSerializer, RequestSerializer, TripSerializer, UserSerializer, GroupSerializer
-from .filters import GroupFilter, UserFilter
+from rest_framework import filters, status, viewsets
+
 from rest_framework.permissions import IsAdminUser
-from rest_framework import status
 from rest_framework.response import Response
 from .standardresponse import StandardResponseMixin
 from dj_rest_auth.registration.views import RegisterView
 from dj_rest_auth.views import LoginView
 
+from .filters import GroupFilter, UserFilter
+from .serializers import (
+    GroupSerializer,
+    RatingSerializer,
+    RequestSerializer,
+    TripSerializer,
+    UserSerializer,
+)
 
-class CustomUserViewSet(StandardResponseMixin, viewsets.ModelViewSet):
-    queryset = CustomUser.objects.select_related('group').all()
+
+
+class CustomUserViewSet(viewsets.ModelViewSet):
+    queryset = CustomUser.objects.select_related("group").all()
     serializer_class = UserSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = UserFilter
@@ -57,9 +65,9 @@ class CustomUserViewSet(StandardResponseMixin, viewsets.ModelViewSet):
 class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
     filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
-    filterset_fields = ['min_participants', 'max_participants', 'name']
-    ordering_fields = ['name', 'min_participants', 'max_participants']
-    ordering = ['name']  # Default ordering
+    filterset_fields = ["min_participants", "max_participants", "name"]
+    ordering_fields = ["name", "min_participants", "max_participants"]
+    ordering = ["name"]  # Default ordering
     filterset_class = GroupFilter
 
     def get_queryset(self):
@@ -84,6 +92,7 @@ class RatingViewSet(viewsets.ModelViewSet):
     serializer_class = RatingSerializer
 
 
+
 class CustomLoginView(StandardResponseMixin, LoginView):
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
@@ -100,3 +109,4 @@ class CustomRegisterView(RegisterView, StandardResponseMixin):
             return self.success_response(data=response.data, user=request.user, status=status.HTTP_201_CREATED)
         else:
             return self.error_response(errors=response.errors, status=response.status_code)
+

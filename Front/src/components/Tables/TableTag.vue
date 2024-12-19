@@ -12,7 +12,7 @@
                                             Status
                                         </th>
                                         <th class="min-w-[150px] py-4 px-4 font-medium text-black dark:text-white">
-                                            Created 
+                                            Created
                                         </th>
                                         <th class="py-4 px-4 font-medium text-black dark:text-white">Actions</th>
                                     </tr>
@@ -63,6 +63,7 @@ import { ref, onMounted } from 'vue';
 import { useToast } from "vue-toastification";
 import instance from '@/axios';
 import DefaultCard from '@/components/Forms/DefaultCard.vue';
+import router from '@/router';
 
 const toast = useToast();
 const pageTitle = ref<string>('Tags');
@@ -92,10 +93,17 @@ const deleteTag = async (tagId: number) => {
     }
 };
 
-const editTag = (tagId: number) => {
-    console.log(`Edit tag with ID: ${tagId}`);
-    // Implement your edit functionality here
-};
+const editTag = async (tagId: number) => {
+  try {
+    // Do any necessary API calls or other logic here
+    await instance.put(`/api/tag/${tagId}/`);
+    // Redirect the user to the update page
+    router.push({ name: 'updateTag', params: { id: tagId } });
+  } catch (error) {
+    console.error('Error updating tag:', error);
+    toast.error("Failed to update tag.", { timeout: 2000 });
+  }
+}
 
 const formatDate = (dateString: string) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };

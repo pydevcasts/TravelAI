@@ -1,12 +1,14 @@
 from dj_rest_auth.registration.views import ConfirmEmailView, VerifyEmailView
 from dj_rest_auth.views import PasswordResetConfirmView
-from django.contrib import admin
-from django.urls import include, re_path, path
 from django.conf import settings
 from django.conf.urls.static import static
-from rest_framework import permissions
-from drf_yasg.views import get_schema_view
+from django.contrib import admin
+from django.urls import include, path, re_path
 from drf_yasg import openapi
+
+from drf_yasg.views import get_schema_view
+from rest_framework import permissions
+
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -20,6 +22,7 @@ schema_view = get_schema_view(
     public=True,
     permission_classes=(permissions.AllowAny,),
 )
+
 
 urlpatterns = [
 
@@ -46,3 +49,9 @@ urlpatterns = [
                           PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL,
                                                                                            document_root=settings.MEDIA_ROOT)
+
+
+
+
+
+     

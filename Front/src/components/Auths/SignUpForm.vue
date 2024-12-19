@@ -29,10 +29,10 @@ const onSignUp = async () => {
       password2: password2.value
     });
     toast.success(`We have sent you a code to ${email.value}. Please verify your email.`, { timeout: 2000 });
-    
+
     // Redirect to login page after successful signup
     router.push('/signin');
-    
+
     emits('setMail', email.value);
   } catch (err) {
     handleLoginError(err);

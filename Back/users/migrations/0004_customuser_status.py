@@ -6,13 +6,21 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0003_remove_customuser_username'),
+        ("users", "0003_remove_customuser_username"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='customuser',
-            name='status',
-            field=models.CharField(choices=[('is_active', 'Active'), ('is_superuser', 'Inactive'), ('is_staff', 'Staff')], default='active', max_length=50),
+            model_name="customuser",
+            name="status",
+            field=models.CharField(
+                choices=[
+                    ("is_active", "Active"),
+                    ("is_superuser", "Inactive"),
+                    ("is_staff", "Staff"),
+                ],
+                default="active",
+                max_length=50,
+            ),
         ),
     ]

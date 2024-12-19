@@ -875,6 +875,9 @@ input[type="submit"], button {
 
     /* Calendar and clock */
 
+
+/*
+
     .calendarbox, .clockbox {
         position: fixed !important;
         top: 50% !important;

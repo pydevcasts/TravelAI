@@ -14,7 +14,7 @@ const pageTitle = ref('Tables')
     <!-- Breadcrumb End -->
 
     <div class="flex flex-col gap-10">
-    
+
       <TableUser />
     </div>
   </DefaultLayout>

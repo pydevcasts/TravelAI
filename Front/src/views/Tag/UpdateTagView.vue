@@ -3,14 +3,14 @@
         <BreadcrumbDefault :pageTitle="pageTitle" />
         <div class="grid grid-cols-1 gap-9 sm:grid-cols-0">
             <div class="flex flex-col gap-9">
-                <DefaultCard cardTitle="Create Tag">
-                    <form @submit="submit">
+                <DefaultCard cardTitle="Update Tag">
+                    <form @submit.prevent="updateTag">
                         <div class="p-6.5">
                             <div class="mb-4.5 ml-3 flex flex-col gap-6 xl:flex-row">
                                 <InputGroup
                                     required="true"
                                     label="Tag"
-                                    v-model="tag"
+                                    v-model="tagName"
                                     type="text"
                                     placeholder="Enter tag name"
                                     customClasses="w-full xl:w-1/2"
@@ -19,7 +19,7 @@
                             <div class="mb-4.5 ml-3 flex flex-col gap-6 xl:flex-row">
                                 <label class="inline-flex items-center cursor-pointer">
                                     <span class="m-3 text-sm font-medium text-gray-900 dark:text-gray-300">Status Mode</span>
-                                    <input type="checkbox" v-model="isDraft" class="sr-only peer" />
+                                    <input type="checkbox" v-model="tagStatus" class="sr-only peer" />
                                     <div class="relative w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full rtl:peer-checked:after:translate-x-[-100%] peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-500 peer-checked:bg-blue-600"></div>
                                 </label>
                             </div>
@@ -29,7 +29,7 @@
                                 :disabled="loading"
                             >
                                 <span v-if="loading">Loading...</span>
-                                <span v-else>Submit</span>
+                                <span v-else>Update</span>
                             </button>
                             <div v-if="errorMessage" class="error-message text-red-600 mt-4">{{ errorMessage }}</div>
                         </div>
@@ -46,58 +46,51 @@ import DefaultCard from '@/components/Forms/DefaultCard.vue';
 import InputGroup from '@/components/Forms/InputGroup.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import { useToast } from "vue-toastification";
-import { ref,computed } from 'vue';
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 import instance from '@/axios';
+import router from '@/router';
 
 const toast = useToast();
-const pageTitle = ref<string>('Tag');
-const tag = ref<string | null>(null);
-const isDraft = ref<boolean>(false); // متغیر برای وضعیت چک باکس
+const route = useRoute();
+const pageTitle = ref<string>('Update Tag');
+const tagName = ref<string>('');
+const tagStatus = ref<boolean>(false);
 const loading = ref<boolean>(false);
 const errorMessage = ref<string | null>(null);
+const tagId = ref<number>(Number(route.params.id));
 
-// محاسبه وضعیت بر اساس چک باکس
-const status = computed(() => isDraft.value ? 'true' : 'false');
-
-// Validate inputs before making the API call
-const validateInputs = (): boolean => {
-    if (!tag.value) {
-        errorMessage.value = "Tag is required.";
-        return false;
-    }
-    errorMessage.value = null; // Clear previous error message
-    return true;
-};
-
-const submit = async (event: Event) => {
-    event.preventDefault(); // Prevent default form submission
-    if (!validateInputs()) {
-        return; // Stop if inputs are not valid
-    }
-    loading.value = true; // Start loading
-
+onMounted(async () => {
     try {
-        console.log('Input values:', { tag: tag.value, status: status.value });
-
-        const response = await instance.post('/api/tag/', {
-            name: String(tag.value),
-            status: status.value, // ارسال وضعیت
-        });
-
-        console.log('API Response:', response);
-
-        tag.value = response.data.name || tag.value; // fallback in case name is null
-        toast.success("Tag successfully created!", { timeout: 2000 });
-        tag.value= ""
+        const response = await instance.get(`/api/tag/${tagId.value}/`);
+        tagName.value = response.data.name;
+        tagStatus.value = response.data.status;
     } catch (error) {
-        console.error('Error creating tag:', error);
-        toast.error("There was a problem!", { timeout: 2000 });
+        console.error('Error fetching tag:', error);
+        errorMessage.value = "Failed to fetch tag information.";
+    }
+});
+
+const updateTag = async () => {
+    try {
+        loading.value = true;
+        await instance.put(`/api/tag/${tagId.value}/`, {
+            name: tagName.value,
+            status: tagStatus.value,
+        });
+        toast.success("Tag updated successfully!", { timeout: 2000 });
+        router.push('/tags/')
+        // Redirect the user back to the list page or show a success message
+    } catch (error) {
+        console.error('Error updating tag:', error);
+        toast.error("Failed to update tag.", { timeout: 2000 });
         errorMessage.value = "An error occurred. Please try again.";
     } finally {
-        loading.value = false; // Stop loading
+        loading.value = false;
     }
 };
 </script>
+
 <style scoped>
 .error-message {
     color:red
