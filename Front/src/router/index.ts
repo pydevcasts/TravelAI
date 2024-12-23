@@ -9,7 +9,9 @@ import ECommerceView from '@/views/Dashboard/ECommerceView.vue'
 import PredictView from '@/views/Predict/PredictView.vue'
 import SettingsView from '@/views/Pages/SettingsView.vue'
 import ProfileView from '@/views/users/ProfileView.vue'
-import TagView from '@/views/Tag/TagView.vue'
+import CreateTagView from '@/views/Tag/CreateTagView.vue'
+import TagListView from '@/views/Tag/TagListView.vue'
+import UpdateTagView from '@/views/Tag/UpdateTagView.vue'
 import UsersView from '@/views/users/UsersView.vue'
 import AlertsView from '@/views/UiElements/AlertsView.vue'
 import ButtonsView from '@/views/UiElements/ButtonsView.vue'
@@ -22,7 +24,7 @@ const routes = [
     component: ECommerceView,
     meta: {
       title: 'eCommerce Dashboard',
-      requiresAuth: true 
+      requiresAuth: true
     }
   },
   {
@@ -31,17 +33,45 @@ const routes = [
     component: ProfileView,
     meta: {
       title: 'Profile',
-      requiresAuth: true 
+      requiresAuth: true
     }
   },
   {
-    path: '/tag',
-    name: 'tag',
-    component: TagView,
+    path: '/tags/',
+    // component: TagContainer, // Optional: a wrapper component to hold child views
     meta: {
-      title: 'tag',
-      requiresAuth: true 
-    }
+      title: 'Tags',
+      requiresAuth: true // Assuming you have authentication
+    },
+    children: [
+      {
+        path: '',
+        name: 'tag-list',
+        component: TagListView,
+        meta: {
+          title: 'Tag List',
+          requiresAuth: true
+        }
+      },
+      {
+        path: 'create/',
+        name: 'create',
+        component: CreateTagView,
+        meta: {
+          title: 'Create Tag',
+          requiresAuth: true
+        }
+      },
+      {
+        path: '/tags/:id/',
+        name: 'updateTag',
+        component: UpdateTagView,
+        meta: {
+          title: 'Update Tag',
+          requiresAuth: true
+        }
+      }
+    ]
   },
 
   // {
@@ -66,7 +96,7 @@ const routes = [
     component: UsersView,
     meta: {
       title: 'Users',
-      requiresAuth: true 
+      requiresAuth: true
     }
   },
   {

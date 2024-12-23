@@ -2,8 +2,8 @@ import { defineStore } from 'pinia';
 import instance from '../axios';
 
 interface User {
-    pk: number;
-    email: string;
+    pk: number,
+    email: string,
     first_name: string,
     last_name: string
 }

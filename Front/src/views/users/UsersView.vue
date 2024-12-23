@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import BreadcrumbDefault from '@/components/Breadcrumbs/BreadcrumbDefault.vue'
-import TableThree from '@/components/Tables/TableThree.vue'
+import TableUser from '@/components/Tables/TableUser.vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
 const pageTitle = ref('Tables')
@@ -14,8 +14,8 @@ const pageTitle = ref('Tables')
     <!-- Breadcrumb End -->
 
     <div class="flex flex-col gap-10">
-    
-      <TableThree />
+
+      <TableUser />
     </div>
   </DefaultLayout>
 </template>

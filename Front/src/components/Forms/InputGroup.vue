@@ -61,10 +61,10 @@ export default defineComponent({
     </label>
     <div class="relative">
       <input
-        :type="showPassword && type === 'password' ? 'text' : type" 
+        :type="showPassword && type === 'password' ? 'text' : type"
         :placeholder="placeholder"
-        :value="inputValue" 
-        @input="handleInput" 
+        :value="inputValue"
+        @input="handleInput"
         class="w-full rounded border-[1.5px] text-black border-stroke bg-transparent py-3 px-5 font-normal outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:text-white dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
       />
       <span v-if="type === 'password'" @click="togglePasswordVisibility" class="absolute right-3 top-3 cursor-pointer">
