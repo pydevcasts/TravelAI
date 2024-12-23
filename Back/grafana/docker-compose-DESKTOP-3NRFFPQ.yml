@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  grafana:
+    image: grafana/grafana:7.5.1
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=nextera
+      - GF_SECURITY_ADMIN_PASSWORD=nextera
+      - GF_SERVER_HTTP_PORT=3000
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - prometheus-data:/etc/prometheus
+    ports:
+      - "9090:9090"
+
+volumes:
+  prometheus-data:
