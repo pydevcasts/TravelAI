@@ -10,4 +10,5 @@ class BlogViewSet(ModelViewSet):
     search_fields = [
         "title",
         "description",
+        "tags",
     ]

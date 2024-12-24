@@ -1,0 +1,39 @@
+.card {
+  margin-bottom: $grid-gutter-width;
+  box-shadow: $card-shadow;
+}
+
+.card-header {
+  border-bottom-width: 1px;
+}
+
+.card-title {
+  font-size: $card-title-font-size;
+  font-weight: $card-title-font-weight;
+  color: $card-title-color;
+}
+
+.card-subtitle {
+  font-weight: $font-weight-normal;
+}
+
+.card-img,
+.card-img-top,
+.card-img-bottom {
+  @include img-fluid;
+
+  @media all and (-ms-high-contrast:none) {
+    height: 100%;
+  }
+}
+
+.card > .table > tbody {
+  tr:last-child td:first-child,
+  tr:last-child th:first-child {
+    border-bottom-left-radius: $card-border-radius;
+  }
+  tr:last-child td:last-child,
+  tr:last-child th:last-child {
+    border-bottom-right-radius: $card-border-radius;
+  }
+}
